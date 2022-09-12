@@ -1,15 +1,11 @@
 <?php
-// setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish');
 date_default_timezone_set('America/Tegucigalpa');
-$oldLocale = setlocale(LC_TIME, 'es_HN');
-setlocale(LC_TIME, $oldLocale);
 include 'inc/templates/header.php';
 include 'inc/conexion.php';
-
 // include 'inc/sesiones.php';
 session_start();
 $name = $_SESSION['nombre_usuario'];
-// $ordenid = $_GET['orden'];
+$ordenid = $_GET['orden'];
 $today = getdate();
 $hora = $today["hours"];
 if ($hora < 6) {
@@ -59,40 +55,29 @@ if ($hora < 6) {
 				<section class="section clientes">
 					<div class="card">
 						<div class="card-body">
-							<H1>Ordenes <?php
-							// date_default_timezone_set('America/Tegucigalpa');
-							$oldLocale = setlocale(LC_TIME, 'es_HN');
-							setlocale(LC_TIME, $oldLocale);
-								$date1 = date('d-m-Y', time());
-								echo $date1;
-								// setlocale(LC_ALL,"es_ES");
-								// echo strftime("%A %d de %B del %Y");
-							?></H1>
+							<H1>Orden #<?php echo $ordenid ?></H1>
 							<table class="table table-striped" id="table1">
 								<thead>
 									<tr>
-										<th>No. Orden</th>
-										<th>Fecha</th>
-										<th>Mesa</th>
-										<th>Mesero</th>
+										<th>No.</th>
+										<th>Producto</th>
+										<th>Precio</th>
 										<th>Estado</th>
 										<th>Acciones</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php
-									$date = date('Y-m-d', time());  
 									// while ($solicitud = $consulta->fetch_array()) {
-									$consulta = $conn->query("SELECT * FROM ordenes a, main_users b WHERE a.date = '$date' and a.id_mesero = b.id ORDER BY a.datetime DESC");
+									$consulta = $conn->query("SELECT * FROM orden_detalle a, menu b, ordenes c WHERE a.id_orden_detalle = $ordenid and b.id = a.id_plato and a.id_orden_detalle = c.id_orden ORDER BY b.nombre ASC");
 									$contador = 1;
 									$total = 0;
 									while ($solicitud = $consulta->fetch_array()) {
 										$id_orden = $solicitud['id_orden'];
-										$datetime = $solicitud['datetime'];
-										$id_mesa = $solicitud['id_mesa'];
-										$mesero = $solicitud['id_mesa'];
-										$nombre = $solicitud['usuario_name'];
-										$apellidos = $solicitud['apellidos'];
+										$nombre = $solicitud['nombre'];
+										$precio = $solicitud['precio_plato'];
+										// $apellidos = $solicitud['apellidos'];
+										// $username = $solicitud['nickname'];
 										// $email = $solicitud['email_user'];
 										$estado = $solicitud['estado'];
 										if ($estado == 'cola') {
@@ -104,10 +89,9 @@ if ($hora < 6) {
 										}
 									?>
 										<tr id="solicitud:<?php echo $solicitud['id_orden'] ?>">
-											<td><?php echo $id_orden; ?></td>
-											<td><?php echo $datetime ?></td>
-											<td><?php echo $id_mesa ?></td>
-											<td><?php echo $nombre . ' '. $apellidos ?></td>
+											<td><?php echo $contador++; ?></td>
+											<td><?php echo $nombre ?></td>
+											<td><?php echo 'L.' . $precio ?></td>
 											<td><?php echo '<span class="badge ' . $color . '">' . $estadoUser . '</span>' ?></td>
 											<td>
 												<!-- <a href="edit-usuario?ID=<?php echo $solicitud['id_orden'] ?>" target="_self"><span class="badge bg-primary"><i class="fas fa-edit"></i>Editar</span></a> -->
@@ -118,10 +102,11 @@ if ($hora < 6) {
 											</td>
 										</tr>
 									<?php
+									$total += $precio;
 									}
 									?>
 								</tbody>
-								<!-- <thead>
+								<thead>
 									<tr>
 										<th></th>
 										<th>Total</th>
@@ -136,7 +121,7 @@ if ($hora < 6) {
 										<th></th>
 										<th></th>
 									</tr>
-								</thead> -->
+								</thead>
 							</table>
 							<div class="col-12 d-flex justify-content-end">
 								<!-- <a href="new-usuario" class="btn btn-primary me-1 mb-1">Nuevo Registro</a> -->

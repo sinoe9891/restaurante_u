@@ -1,6 +1,6 @@
 <?php
 // include '../conexion.php';
-
+date_default_timezone_set('America/Tegucigalpa');
 // Crear Usuario
 //die(json_encode($_POST));
 $accion = $_POST['accion'];
@@ -78,13 +78,14 @@ if ($accion === 'newOrden') {
 	echo $mesa.' Mesa</br>';
 	echo $mesero.' Mesero</br>';
 	$DateAndTime = date('Y-m-d h:i:s', time());  
+	$date = date('Y-m-d', time());  
 	//Creamos la orden
-	$orden = "INSERT INTO `ordenes` (`id_orden`, `fecha`, `estado`, `id_mesa`) VALUES (NULL, '$DateAndTime', 'cola', '$mesa')";
+	$orden = "INSERT INTO `ordenes` (`id_orden`, `datetime`, `estado`, `id_mesa`, `date`, `id_mesero`) VALUES (NULL, '$DateAndTime', 'cola', '$mesa', '$date', '$mesero')";
 	if (mysqli_query($conn, $orden)) {
 		$ultimoid = $conn -> insert_id;
 		// echo $insert_id; 
 	}
-	echo $insert_id; 
+	echo $ultimoid; 
 	foreach ($_POST['menu'] as $key => $val) {
 		$consulta = $conn->query("SELECT * FROM `menu` WHERE id = $val");
 		$contador = 1;
@@ -93,13 +94,13 @@ if ($accion === 'newOrden') {
 			$precio = $solicitud['precio'];
 			//insert into
 			
-			echo $DateAndTime;
-			$sql = "INSERT INTO orden_detalle (`id_orden`, `id_plato`, `precio_plato`, `id_mesero`) VALUES ($ultimoid, '$val', '$precio', '$mesero')";
+			// echo $DateAndTime;
+			$sql = "INSERT INTO orden_detalle (`id_orden_detalle`, `id_plato`, `precio_plato`, `id_mesero`) VALUES ('$ultimoid', '$val', '$precio', '$mesero')";
 			if (mysqli_query($conn, $sql)) {
 				echo 'Insertó Orden';
-				header('Location: ../../ordenes.php?orden=1'.$ultimoid);
+				header('Location: ../../orden.php?orden='.$ultimoid);
 			} else {
-				header('Location: ../../ordenes.php?orden=0');
+				header('Location: ../../orden.php?orden=0');
 				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 			}
 			
