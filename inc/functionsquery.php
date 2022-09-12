@@ -21,5 +21,15 @@
 			return false;
 		}
 	}
+	function obtenerNumeroMesas() {
+		include 'conexion.php';
+		try {
+			return $conn->query("SELECT * FROM mesas");
+
+		} catch(Exception $e) {
+			echo "Error! : " . $e->getMessage();
+			return false;
+		}
+	}
 
 ?>

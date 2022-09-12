@@ -39,10 +39,15 @@ function validarRegistro(e) {
                     console.log(respuesta);
                     if (respuesta.respuesta === 'correcto') {
                         //si es un nuevo usuario 
-						if (respuesta.tipo === 'login') {
+						if (respuesta.tipo === 'login' && respuesta.role === 1) {
 							//redireccionar a la pagina principal
 							console.log(respuesta);
-							window.location.href = 'dashboard.php';
+							window.location.href = 'dashboard';
+							
+						}else if (respuesta.tipo === 'login' && respuesta.role === 3) {
+							//redireccionar a la pagina principal
+							console.log(respuesta);
+							window.location.href = 'mesas_mesero';
 							
 						} else if (respuesta.tipo == 'crear') {
                             Swal.fire({

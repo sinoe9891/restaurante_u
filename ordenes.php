@@ -5,6 +5,7 @@ include 'inc/conexion.php';
 // include 'inc/sesiones.php';
 session_start();
 $name = $_SESSION['nombre_usuario'];
+$ordenid = $_GET['orden'];
 $today = getdate();
 $hora = $today["hours"];
 if ($hora < 6) {
@@ -17,8 +18,6 @@ if ($hora < 6) {
 	$saludo = "Buenas Noches ";
 }
 ?>
-
-</style>
 
 <body>
 	<div class="container-xxl bg-white p-0">
@@ -53,67 +52,65 @@ if ($hora < 6) {
 		<!-- Service Start -->
 		<div class="container-xxl py-5">
 			<div class="container">
-				<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-					<h5 class="section-title ff-secondary text-center text-primary fw-normal">Administrar</h5>
-					<h1 class="mb-5">Mesas</h1>
-				</div>
 				<section class="section clientes">
 					<div class="card">
 						<div class="card-body">
-							<div class="row g-4">
-								<?php
-								$consulta = $conn->query("SELECT * FROM mesas ORDER BY numero_mesa ASC");
-								$contador = 1;
-								while ($solicitud = $consulta->fetch_array()) {
-									$idmesa = $solicitud['id'];
-									$numero_mesa = $solicitud['numero_mesa'];
-									$estado = $solicitud['estado_mesa'];
-									$asignada = $solicitud['asignada'];
-									if ($estado == 'a') {
-										$estadoMesa = 'Habilitado';
-										$color = 'bg-success';
-									} elseif ($estado == 'd') {
-										$estadoMesa = 'Deshabilitado';
-										$color = 'bg-secondary';
+							<H1>Orden #<?php echo $ordenid ?></H1>
+							<table class="table table-striped" id="table1">
+								<thead>
+									<tr>
+										<th>No.</th>
+										<th>Producto</th>
+										<th>Precio</th>
+										<th>Estado</th>
+										<th>Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+									$consulta = $conn->query("SELECT DISTINCT * FROM ordenes a, orden_detalle b, menu c WHERE a.id_orden = $ordenid and b.id_plato = c.id ORDER BY a.role_user ASC");
+									$contador = 1;
+									while ($solicitud = $consulta->fetch_array()) {
+										$id = $solicitud['id'];
+										$descripcion = $solicitud['descripcion'];
+										$usuario_name = $solicitud['usuario_name'];
+										$apellidos = $solicitud['apellidos'];
+										$username = $solicitud['nickname'];
+										$email = $solicitud['email_user'];
+										$estado = $solicitud['estado_user'];
+										if ($estado == 'a') {
+											$estadoUser = 'Habilitado';
+											$color = 'bg-success';
+										} elseif ($estado == 'd') {
+											$estadoUser = 'Deshabilitado';
+											$color = 'bg-secondary';
+										}
+									?>
+										<tr id="solicitud:<?php echo $solicitud['id'] ?>">
+											<td><?php echo $contador++; ?></td>
+											<td><?php echo $usuario_name . ' ' . $apellidos ?></td>
+											<td><?php echo '@' . $username ?></td>
+											<td><?php echo $email ?></td>
+											<td><?php echo '<span class="badge ' . $color . '">' . $descripcion ?></td>
+											<td><?php echo '<span class="badge ' . $color . '">' . $estadoUser . '</span>' ?></td>
+											<td>
+												<a href="edit-usuario?ID=<?php echo $solicitud['id'] ?>" target="_self"><span class="badge bg-primary"><i class="fas fa-edit"></i>Editar</span></a>
+
+												<span class="badge bg-danger" id="<?php echo $solicitud['id'] ?>" onclick="eliminar('<?php echo $solicitud['id'] ?>')">
+													<i class="fas fa-trash"></i>Eliminar</span>
+											</td>
+										</tr>
+									<?php
 									}
-								?>
-									<div class="col-lg-3 col-sm-6 wow fadeInUp">
-										<div style="text-align:center;">
-											<a href="edit-mesa?idm=<?php echo $idmesa; ?>">
-												<img class="mesa" width='200px' src="img/mesa.svg" alt="">
-												<p>Mesa <?php echo $numero_mesa; ?></p>
-												<a href="edit-mesa?idm=<?php echo $solicitud['id'] ?>" target="_self">
-														<?php
-															if ($asignada == 0) {
-																echo '<span class="badge bg-danger">Sin Mesero</span>';
-															}else{
-																echo '<span class="badge bg-success"></span>';
-															};
-														?>
-													<span class="badge bg-primary">
-														<i class="fas fa-edit"></i>
-														<?php
-															if ($asignada == 0) {
-																echo 'Asignar';
-															}else{
-																echo 'Editar';
-															};
-														?>
-													</span>
-												</a>
-											</a>
-										</div>
-									</div>
-								<?php
-								}
-								?>
+									?>
+								</tbody>
+							</table>
+							<div class="col-12 d-flex justify-content-end">
+								<a href="new-usuario" class="btn btn-primary me-1 mb-1">Nuevo Registro</a>
+								<a href="mesas_mesero">
+									<div class="btn btn-secondary me-1 mb-1">Regresar</div>
+								</a>
 							</div>
-						</div>
-						<div class="col-12 d-flex justify-content-end wow fadeInUp" data-wow-delay="0.1s">
-							<a href="new-mesa" class="btn btn-primary me-1 mb-1">Nueva Mesa</a>
-							<a href="dashboard">
-								<div class="btn btn-secondary me-1 mb-1">Regresar</div>
-							</a>
 						</div>
 					</div>
 				</section>
