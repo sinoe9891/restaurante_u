@@ -63,6 +63,27 @@ if ($hora < 6) {
 			<div class="container">
 				<div class="row g-4">
 
+					<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+						<div class="service-item rounded pt-3">
+							<a href="usuarios">
+								<div class="p-4">
+									<i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
+									<h5>Usuarios</h5>
+									<!-- <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p> -->
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+						<div class="service-item rounded pt-3">
+							<a href="mesas">
+								<div class="p-4">
+									<img class="iconomesa" src="img/mesa.svg" alt="">
+									<h5>Mesas</h5>
+								</div>
+							</a>
+						</div>
+					</div>
 					<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
 						<div class="service-item rounded pt-3">
 							<div class="p-4">
@@ -79,17 +100,6 @@ if ($hora < 6) {
 								<h5>Ordenes</h5>
 								<p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
 							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-						<div class="service-item rounded pt-3">
-							<a href="usuarios">
-								<div class="p-4">
-									<i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
-									<h5>Usuarios</h5>
-									<!-- <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p> -->
-								</div>
-							</a>
 						</div>
 					</div>
 					<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
@@ -110,15 +120,7 @@ if ($hora < 6) {
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-						<div class="service-item rounded pt-3">
-							<div class="p-4">
-								<i class="fa fa-3x fa-headset text-primary mb-4"></i>
-								<h5>Mesas</h5>
-								<p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-							</div>
-						</div>
-					</div>
+
 					<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
 						<div class="service-item rounded pt-3">
 							<div class="p-4">

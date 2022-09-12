@@ -16,3 +16,12 @@
 .navbar-dark .navbar-brand img{
 	max-height: 80px !important;
 }
+
+.mesa{
+	width: 100%;
+	max-width: 150px;
+}
+.iconomesa{
+	width:48px;
+	margin-bottom: 1.5rem !important;
+}
