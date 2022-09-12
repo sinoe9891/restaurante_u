@@ -1,0 +1,18 @@
+.pb-4 {
+    padding-bottom: 0rem !important;
+}
+.pt-5 {
+    padding-top: 0rem !important;
+}
+.my-5 {
+    margin-top: 3rem !important;
+    margin-bottom: 0rem !important;
+}
+
+.container, .container-sm, .container-md, .container-lg, .container-xl {
+    max-width: 1140px;
+}
+
+.navbar-dark .navbar-brand img{
+	max-height: 80px !important;
+}
