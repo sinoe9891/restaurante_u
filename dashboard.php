@@ -96,10 +96,12 @@ if ($hora < 6) {
 					</div>
 					<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
 						<div class="service-item rounded pt-3">
-							<div class="p-4">
-								<i class="fa fa-3x fa-cart-plus text-primary mb-4"></i>
-								<h5>Ordenes</h5>
-							</div>
+							<a href="ordenes_admin">
+								<div class="p-4">
+									<i class="fa fa-3x fa-cart-plus text-primary mb-4"></i>
+									<h5>Ordenes</h5>
+								</div>
+							</a>
 						</div>
 					</div>
 					<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">

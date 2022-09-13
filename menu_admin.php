@@ -25,7 +25,7 @@ if (isset($_GET['menu'])) {
 	if ($busqueda == '') {
 		$busquedainput = '';
 		$nombreboton = 'Buscar';
-	}else{
+	} else {
 		$busquedainput = $_GET['menu'];
 	}
 } else {
@@ -95,8 +95,8 @@ if (isset($_GET['menu'])) {
 										</div>
 										<div class="col-3">
 											<div class="form-group" style="display: flex;justify-content: space-around;">
-												<input type="text" style="text-align: left; margin-right: 10px" class="form-control" id="nome" name="menu" value="<?php echo $busquedainput?>" placeholder="Buscar">
-												<input type="submit" value="<?php echo $nombreboton?>" class="btn btn-primary" Placeholder>
+												<input type="text" style="text-align: left; margin-right: 10px" class="form-control" id="nome" name="menu" value="<?php echo $busquedainput ?>" placeholder="Buscar">
+												<input type="submit" value="<?php echo $nombreboton ?>" class="btn btn-primary" Placeholder>
 											</div>
 										</div>
 									</form>
@@ -113,12 +113,12 @@ if (isset($_GET['menu'])) {
 								</thead>
 								<tbody>
 									<?php
-									
+
 									// $busqueda = $_GET['menu'];
 
 									if ($busqueda == '') {
 										$consulta = $conn->query("SELECT * FROM menu ORDER BY nombre ASC");
-									} else if($busqueda){
+									} else if ($busqueda) {
 										$consulta = $conn->query("SELECT * FROM menu WHERE nombre LIKE '%$busqueda%' ORDER BY nombre ASC");
 									}
 									// $consulta = $conn->query("SELECT * FROM menu WHERE nombre LIKE '%$busqueda%' ORDER BY nombre ASC");

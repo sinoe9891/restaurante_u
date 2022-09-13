@@ -21,10 +21,22 @@ if ($hora < 6) {
 }
 $consulta = $conn->query("SELECT * FROM `ordenes` order by id_orden DESC LIMIT 1");
 // $contador = 1;
-while ($solicitud = $consulta->fetch_array()) {
-	$ultimaorden = $solicitud['id_orden'];
-	// echo $ultimaorden;
+$ultimaorden = 0;
+
+$sql = "SELECT * FROM `ordenes` order by id_orden DESC LIMIT 1";
+
+if ($result=mysqli_query($conn,$sql)) {
+    $rowcount=mysqli_num_rows($result);
+	if ($rowcount > 0) {
+		while ($solicitud = $consulta->fetch_array()) {
+			$ultimaorden = $solicitud['id_orden'];
+		}
+	}else{
+		$ultimaorden = 0;
+	}
 }
+
+
 ?>
 
 <body>

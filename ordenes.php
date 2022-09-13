@@ -83,7 +83,7 @@ if ($hora < 6) {
 									<?php
 									$date = date('Y-m-d', time());  
 									// while ($solicitud = $consulta->fetch_array()) {
-									$consulta = $conn->query("SELECT * FROM ordenes a, main_users b WHERE a.date = '$date' and a.id_mesero = b.id and a.estado = 'cola' ORDER BY a.datetime DESC");
+									$consulta = $conn->query("SELECT * FROM ordenes a, main_users b WHERE a.date = '$date' and a.id_mesero = b.id and a.estado = 'cola' ORDER BY a.datetime ASC");
 									$contador = 1;
 									$total = 0;
 									while ($solicitud = $consulta->fetch_array()) {

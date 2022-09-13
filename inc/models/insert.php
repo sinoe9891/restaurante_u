@@ -104,10 +104,10 @@ if ($accion === 'newPlato') {
 		if ($preciooferta == '') {
 			$oferta = 0;
 			$preciooferta = 0;
-		}else{
+		} else {
 			$oferta = 1;
 		}
-	}else{
+	} else {
 		$oferta = 0;
 		$preciooferta = 0;
 	}
@@ -123,8 +123,6 @@ if ($accion === 'newPlato') {
 		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 	}
 }
-
-
 
 
 
@@ -157,13 +155,55 @@ if ($accion === 'newOrden') {
 			$sql = "INSERT INTO orden_detalle (`id_orden_detalle`, `id_plato`, `precio_plato`, `id_mesero`) VALUES ('$ultimoid', '$val', '$precio', '$mesero')";
 			if (mysqli_query($conn, $sql)) {
 				echo 'Insertó Orden';
-				header('Location: ../../orden.php?orden=' . $ultimoid);
+				header('Location: ../../orden.php?orden=' . $ultimoid.'&fact=true');
 			} else {
-				header('Location: ../../orden.php?orden=0');
+				header('Location: ../../orden.php?orden=0&fact=false');
 				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 			}
 		}
 	}
+}
 
+if ($accion === 'facturacrear') {
+	include '../conexion.php';
+	$id_orden = $_POST['id_orden'];
+	$DateAndTime = date('Y-m-d h:i:s', time());
+	$datetime = date('Y-m-d h:i:s', time());
+	// echo $DateAndTime;
+	// $datetime  = $_POST['datetime'];
+	$idmesero = $_POST['idmesero'];
+	$total = $_POST['total'];
+	$grantotal = $_POST['grantotal'];
+	$descuento = $_POST['descuento'];
+	$propina = $_POST['propina'];
+	$impuesto = $_POST['impuestototal'];
+	$estado_factura = 'pagado';
 
+	// echo $url = $_POST['url_foto'];
+	if (isset($_POST['precioferta'])) {
+		$preciooferta = $_POST['precioferta'];
+		if ($preciooferta == '') {
+			$oferta = 0;
+			$preciooferta = 0;
+		} else {
+			$oferta = 1;
+		}
+	} else {
+		$oferta = 0;
+		$preciooferta = 0;
+	}
+
+	//Si el usuario existe verificar el password
+	echo 'Procede a Insertar';
+	$sql = "INSERT INTO `facturas` (no_factura, fecha_hora, id_orden, id_mesero, total, descuento, propina, impuesto, subtotal, estado_factura, grantotal) VALUES (NULL, '$datetime', '$id_orden', '$idmesero', '$grantotal', '$descuento', '$propina', '$impuesto', '$total', '$estado_factura', '$grantotal')";
+
+	$orden = "UPDATE `ordenes` SET `estado` = 'pagada' WHERE `ordenes`.`id_orden` = $id_orden";
+
+	if (mysqli_query($conn, $sql) && mysqli_query($conn, $orden)) {
+		echo 'Insertó';
+		header('Location: ../../detalle_factura.php??ID='.$id_orden.'add=1');
+	} else {
+		header('Location: ../../detalle_factura.php??ID='.$id_orden.'add=0');
+		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
 }
