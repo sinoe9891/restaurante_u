@@ -16,7 +16,7 @@ include 'inc/templates/header.php';
 		<!-- Navbar & Hero Start -->
 		<div class="container-xxl position-relative p-0">
 			<?php
-			include 'inc/templates/navbar.php';
+			include 'inc/templates/navbar-admin.php';
 			?>
 
 			<div class="container-xxl py-5 bg-dark hero-header mb-5">
@@ -115,7 +115,7 @@ include 'inc/templates/header.php';
 								<img class="img-fluid" src="img/team-2.jpg" alt="">
 							</div>
 							<h5 class="mb-0">Martín Bertrand</h5>
-							<small>Backend</small>
+							<small>Backend | BDA </small>
 							<div class="d-flex justify-content-center mt-3">
 								<a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
 								<a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
@@ -143,7 +143,7 @@ include 'inc/templates/header.php';
 								<img class="img-fluid" src="img/team-4.jpg" alt="">
 							</div>
 							<h5 class="mb-0">Patricia Nicole</h5>
-							<small>BenchMarking</small>
+							<small>UX Designer</small>
 							<div class="d-flex justify-content-center mt-3">
 								<a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
 								<a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>

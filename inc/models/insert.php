@@ -69,9 +69,6 @@ if ($accion === 'newUsuario') {
 	}
 }
 
-
-echo $accion;
-
 if ($accion === 'newMesa') {
 	include '../conexion.php';
 	echo $_POST['numero_mesa'];
@@ -88,6 +85,41 @@ if ($accion === 'newMesa') {
 		header('Location: ../../new-mesa.php?add=1');
 	} else {
 		header('Location: ../../new-mesa.php?add=0');
+		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+}
+
+if ($accion === 'newPlato') {
+	include '../conexion.php';
+	$nombreplato = $_POST['nombreplato'];
+	$precio = $_POST['precio'];
+	$precioferta = $_POST['precioferta'];
+	$categoria = $_POST['categoria'];
+	$estado = $_POST['estado'];
+	$url = $_POST['url'];
+	$descripcion = $_POST['descripcion'];
+	// echo $url = $_POST['url_foto'];
+	if (isset($_POST['precioferta'])) {
+		$preciooferta = $_POST['precioferta'];
+		if ($preciooferta == '') {
+			$oferta = 0;
+			$preciooferta = 0;
+		}else{
+			$oferta = 1;
+		}
+	}else{
+		$oferta = 0;
+		$preciooferta = 0;
+	}
+
+	//Si el usuario existe verificar el password
+	echo 'Procede a Insertar';
+	$sql = "INSERT INTO `menu` (`id`, `nombre`, `descripcion`, `precio`, `categoria`, `url_foto`, `oferta`, `precio_oferta`, `estado_plato`) VALUES (NULL, '$nombreplato', '$descripcion', '$precio', '$categoria', '', '$oferta', '$preciooferta', '$estado')";
+	if (mysqli_query($conn, $sql)) {
+		echo 'Insertó';
+		header('Location: ../../new-plato.php?add=1');
+	} else {
+		header('Location: ../../new-plato.php?add=0');
 		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 	}
 }

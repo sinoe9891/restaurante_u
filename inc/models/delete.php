@@ -45,3 +45,18 @@ if (isset($_GET['delete']) && isset($_GET['idm'])) {
 		}
 	}
 }
+
+if (isset($_GET['delete']) && isset($_GET['idplato'])) {
+	$accion = $_GET['delete'];
+	$id = $_GET['idplato'];
+	if ($accion === 'true') {
+		$sql = "DELETE FROM `menu` WHERE `menu`.`id` = '$id'";
+		if (mysqli_query($conn, $sql)) {
+			echo 'Insertó';
+			header('Location: ../../menu_admin?del=1');
+		} else {
+			header('Location: ../../menu_admin?del=0');
+			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		}
+	}
+}

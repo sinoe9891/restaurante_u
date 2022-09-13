@@ -3,8 +3,6 @@ include 'inc/templates/header.php';
 date_default_timezone_set('America/Tegucigalpa');
 include 'inc/conexion.php';
 // include 'inc/sesiones.php';
-session_start();
-$name = $_SESSION['nombre_usuario'];
 $today = getdate();
 $hora = $today["hours"];
 if ($hora < 6) {
@@ -428,7 +426,7 @@ if ($hora < 6) {
 								<img class="img-fluid" src="img/team-2.jpg" alt="">
 							</div>
 							<h5 class="mb-0">Martín Bertrand</h5>
-							<small>Backend</small>
+							<small>Backend | BDA </small>
 							<div class="d-flex justify-content-center mt-3">
 								<a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
 								<a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
@@ -456,7 +454,7 @@ if ($hora < 6) {
 								<img class="img-fluid" src="img/team-4.jpg" alt="">
 							</div>
 							<h5 class="mb-0">Patricia Nicole</h5>
-							<small>BenchMarking</small>
+							<small>UX Designer</small>
 							<div class="d-flex justify-content-center mt-3">
 								<a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
 								<a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
@@ -478,6 +476,11 @@ if ($hora < 6) {
 							</div>
 						</div>
 					</div>
+					<!-- <div class="col wow fadeInUp" data-wow-delay="0.7s">
+						<div class="team-item text-center rounded overflow-hidden">
+
+						</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

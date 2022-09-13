@@ -21,9 +21,9 @@ if (isset($_POST['user_id']) && isset($_POST['update'])) {
 
 		if ($conn->query($sql) === TRUE) {
 			echo "Record updated successfully";
-			header('Location: ../../edit-usuario.php?ID='.$id_usuario.'&up=1');
+			header('Location: ../../edit-usuario.php?ID=' . $id_usuario . '&up=1');
 		} else {
-			header('Location: ../../edit-usuario.php?ID='.$id_usuario.'&up=0');
+			header('Location: ../../edit-usuario.php?ID=' . $id_usuario . '&up=0');
 		}
 	}
 };
@@ -35,7 +35,7 @@ if (isset($_POST['idm']) && isset($_POST['updatemesa'])) {
 	$estado = $_POST['estado'];
 	if ($role == 0) {
 		$asignar = 0;
-	}else{
+	} else {
 		$asignar = 1;
 	}
 
@@ -46,9 +46,41 @@ if (isset($_POST['idm']) && isset($_POST['updatemesa'])) {
 
 		if ($conn->query($sql) === TRUE) {
 			echo "Record updated successfully";
-			header('Location: ../../edit-mesa.php?idm='.$idm.'&up=1');
+			header('Location: ../../edit-mesa.php?idm=' . $idm . '&up=1');
 		} else {
 			// header('Location: ../../edit-mesa.php?idm='.$idm.'&up=0');
 		}
+	}
+};
+
+if (isset($_POST['idplato']) && isset($_POST['updateplato'])) {
+	$idplato = $_POST['idplato'];
+	$nombreplato = $_POST['nombreplato'];
+	$precio = $_POST['precio'];
+	$precioferta = $_POST['precioferta'];
+	$categoria = $_POST['categoria'];
+	$estado = $_POST['estado'];
+	$descripcion = $_POST['descripcion'];
+	$url = $_POST['url'];
+	if (isset($_POST['precioferta'])) {
+		$preciooferta = $_POST['precioferta'];
+		if ($preciooferta == '') {
+			$oferta = 0;
+			$preciooferta = 0;
+		} else {
+			$oferta = 1;
+		}
+	} else {
+		$oferta = 0;
+		$preciooferta = 0;
+	}
+	
+	$sql = "UPDATE `menu` SET `nombre` = '$nombreplato', `descripcion` = '$descripcion', `precio` = '$precio', `categoria` = '$categoria', `url_foto` = '$url', `oferta` = '$oferta', `precio_oferta` = '$preciooferta', `estado_plato` = '$estado'  WHERE `menu`.`id` = $idplato";
+
+	if ($conn->query($sql) === TRUE) {
+		echo "Record updated successfully";
+		header('Location: ../../edit-plato.php?idplato='.$idplato.'&up=1');
+	} else {
+		// header('Location: ../../edit-plato.php?idm='.$idm.'&up=0');
 	}
 };

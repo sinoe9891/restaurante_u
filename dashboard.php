@@ -49,7 +49,7 @@ if ($hora < 6) {
 				<div class="container my-5 py-5">
 					<div class="row ">
 						<div class="col-lg-12 text-center text-lg-start">
-							<h6 class="display-3 text-white animated text-center"><?php echo $saludo . $_SESSION["nombre_usuario"]; ?></h6>
+							<h6 class="display-3 text-white animated text-center" style="font-size: 40px;"> Buenos días Danny</h6>
 						</div>
 					</div>
 				</div>
@@ -86,10 +86,12 @@ if ($hora < 6) {
 					</div>
 					<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
 						<div class="service-item rounded pt-3">
-							<div class="p-4">
-								<i class="fa fa-3x fa-utensils text-primary mb-4"></i>
-								<h5>Menú</h5>
-							</div>
+							<a href="menu_admin">
+								<div class="p-4">
+									<i class="fa fa-3x fa-utensils text-primary mb-4"></i>
+									<h5>Menú</h5>
+								</div>
+							</a>
 						</div>
 					</div>
 					<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">

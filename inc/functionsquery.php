@@ -31,5 +31,15 @@
 			return false;
 		}
 	}
+	function obtenerCategoria($id = null) {
+		include 'conexion.php';
+		try {
+			return $conn->query("SELECT * FROM categorias_menu WHERE id_categoria = {$id}");
+
+		} catch(Exception $e) {
+			echo "Error! : " . $e->getMessage();
+			return false;
+		}
+	}
 
 ?>

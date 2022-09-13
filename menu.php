@@ -116,7 +116,13 @@ if ($hora < 6) {
 										<div class="w-100 d-flex flex-column text-start ps-4">
 											<h5 class="d-flex justify-content-between border-bottom pb-2">
 												<span><?php echo $nombre ?></span>
-												<span class="text-primary">L.<?php echo $precio ?></span>
+												<?php
+													if($oferta == 1){
+														echo '<div style="text-align: right;"><div><span class="text-primary" style="font-size: 13px;text-decoration: line-through !important;">Antes L.'.$precio.'</span></div><div><span class="text-primary" style="color:#dc3545 !important;">Oferta L. '.$precio_oferta.'</span></div></div>';
+													}else{
+														echo '<span class="text-primary">L.'.$precio.'</span>';
+													};
+												?>
 											</h5>
 											<small class="fst-italic"><?php echo $descripcion ?></small>
 										</div>
@@ -155,7 +161,13 @@ if ($hora < 6) {
 										<div class="w-100 d-flex flex-column text-start ps-4">
 											<h5 class="d-flex justify-content-between border-bottom pb-2">
 												<span><?php echo $nombre ?></span>
-												<span class="text-primary">L.<?php echo $precio ?></span>
+												<?php
+													if($oferta == 1){
+														echo '<div style="text-align: right;"><div><span class="text-primary" style="font-size: 13px;text-decoration: line-through !important;">Antes L.'.$precio.'</span></div><div><span class="text-primary" style="color:#dc3545 !important;">Oferta L. '.$precio_oferta.'</span></div></div>';
+													}else{
+														echo '<span class="text-primary">L.'.$precio.'</span>';
+													};
+												?>
 											</h5>
 											<small class="fst-italic"><?php echo $descripcion ?></small>
 										</div>
@@ -194,7 +206,13 @@ if ($hora < 6) {
 										<div class="w-100 d-flex flex-column text-start ps-4">
 											<h5 class="d-flex justify-content-between border-bottom pb-2">
 												<span><?php echo $nombre ?></span>
-												<span class="text-primary">L.<?php echo $precio ?></span>
+												<?php
+													if($oferta == 1){
+														echo '<div style="text-align: right;"><div><span class="text-primary" style="font-size: 13px;text-decoration: line-through !important;">Antes L.'.$precio.'</span></div><div><span class="text-primary" style="color:#dc3545 !important;">Oferta L. '.$precio_oferta.'</span></div></div>';
+													}else{
+														echo '<span class="text-primary">L.'.$precio.'</span>';
+													};
+												?>
 											</h5>
 											<small class="fst-italic"><?php echo $descripcion ?></small>
 										</div>
