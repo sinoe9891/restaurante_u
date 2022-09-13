@@ -73,7 +73,7 @@ if ($accion === 'newOrden') {
 	include '../conexion.php';
 	$mesa = $_POST['mesa'];
 	$mesero = $_POST['mesero'];
-	$checkBox = implode(',', $_POST['menu']);
+	$checkBox = implode(',', $_POST['menuplato']);
 
 	echo $mesa.' Mesa</br>';
 	echo $mesero.' Mesero</br>';
@@ -86,7 +86,7 @@ if ($accion === 'newOrden') {
 		// echo $insert_id; 
 	}
 	echo $ultimoid; 
-	foreach ($_POST['menu'] as $key => $val) {
+	foreach ($_POST['menuplato'] as $key => $val) {
 		$consulta = $conn->query("SELECT * FROM `menu` WHERE id = $val");
 		$contador = 1;
 		while ($solicitud = $consulta->fetch_array()) {

@@ -97,7 +97,7 @@ if ($hora < 6) {
 							</a>
 						</li>
 					</ul>
-					<form action="inc/models/insert.php" method="post" enctype="multipart/form-data">
+					<form action="ordenar.php" method="post" enctype="multipart/form-data">
 						<div class="tab-content">
 							<div id="tab-1" class="tab-pane fade show p-0 active">
 								<div class="row g-4">

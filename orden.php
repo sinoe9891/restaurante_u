@@ -111,12 +111,7 @@ if ($hora < 6) {
 										<th></th>
 										<th>Total</th>
 										<th><?php 
-										
-										
 										echo 'L.' . sprintf('%.2f',$total);
-										
-										
-										
 										?></th>
 										<th></th>
 										<th></th>
@@ -124,7 +119,7 @@ if ($hora < 6) {
 								</thead>
 							</table>
 							<div class="col-12 d-flex justify-content-end">
-								<!-- <a href="new-usuario" class="btn btn-primary me-1 mb-1">Nuevo Registro</a> -->
+								<input type="submit" class="btn btn-primary me-1 mb-1" name="name" value="Cocinar">
 								<a href="mesas_mesero">
 									<div class="btn btn-secondary me-1 mb-1">Regresar</div>
 								</a>

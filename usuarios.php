@@ -95,7 +95,7 @@ if ($hora < 6) {
 											<td><?php echo '<span class="badge ' . $color . '">' . $estadoUser . '</span>' ?></td>
 											<td>
 												<a href="edit-usuario?ID=<?php echo $solicitud['id'] ?>" target="_self"><span class="badge bg-primary"><i class="fas fa-edit"></i>Editar</span></a>
-
+										
 												<span class="badge bg-danger" id="<?php echo $solicitud['id'] ?>" onclick="eliminar('<?php echo $solicitud['id'] ?>')">
 													<i class="fas fa-trash"></i>Eliminar</span>
 											</td>
