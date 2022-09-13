@@ -31,6 +31,21 @@ if (isset($_GET['delete']) && isset($_GET['orden'])) {
 	}
 }
 
+if (isset($_GET['delete']) && isset($_GET['anular'])) {
+	$accion = $_GET['delete'];
+	$id_orden = $_GET['anular'];
+	if ($accion === 'true') {
+		$sql = "UPDATE ordenes SET estado = 'cancelada' WHERE id_orden = $id_orden";
+		if (mysqli_query($conn, $sql)) {
+			echo 'Insertó';
+			header('Location: ../../ordenes_admin?del=1');
+		} else {
+			header('Location: ../../ordenes_admin?del=0');
+			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		}
+	}
+}
+
 if (isset($_GET['delete']) && isset($_GET['idm'])) {
 	$accion = $_GET['delete'];
 	$id = $_GET['idm'];

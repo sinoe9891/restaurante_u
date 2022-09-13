@@ -84,7 +84,8 @@ if ($hora < 6) {
 									$date = date('Y-m-d', time());
 									// while ($solicitud = $consulta->fetch_array()) {
 									// $consulta = $conn->query("SELECT * FROM ordenes a, main_users b WHERE a.date = '$date' and a.id_mesero = b.id and a.estado = 'concluida' ORDER BY a.datetime DESC");
-									$consulta = $conn->query("SELECT * FROM ordenes a, main_users b WHERE a.id_mesero = b.id and `estado` NOT IN ('cola') ORDER BY `a`.`id_orden` DESC;");
+									// $consulta = $conn->query("SELECT * FROM ordenes a, main_users b WHERE a.id_mesero = b.id and `estado` NOT IN ('cola') ORDER BY `a`.`id_orden` DESC;");
+									$consulta = $conn->query("SELECT * FROM ordenes a, main_users b WHERE a.id_mesero = b.id ORDER BY `a`.`id_orden` DESC;");
 									$contador = 1;
 									$total = 0;
 									while ($solicitud = $consulta->fetch_array()) {
@@ -99,6 +100,7 @@ if ($hora < 6) {
 										if ($estado == 'cola') {
 											$estadoUser = 'En Proceso';
 											$color = 'bg-success';
+											$ver = '';
 										} elseif ($estado == 'cancelada') {
 											$estadoUser = 'Cancelada';
 											$color = 'bg-secondary';
@@ -124,7 +126,7 @@ if ($hora < 6) {
 											<td>
 												<a href="detalle_factura?ID=<?php echo $solicitud['id_orden'] ?>" target="_self"><span class="badge bg-primary"><i class="fas fa-eye"></i>Ver Detalle</span></a>
 
-												<span class="badge bg-danger" style='<?php echo $ver ?>' id="<?php echo $solicitud['id'] ?>" onclick="eliminar('<?php echo $solicitud['id_orden'] ?>')">
+												<span class="badge bg-danger" style='<?php echo $ver ?>' id="<?php echo $solicitud['id_orden'] ?>" onclick="eliminar('<?php echo $solicitud['id_orden'] ?>')">
 													<i class="fas fa-trash"></i>Anular
 												</span>
 											</td>
@@ -190,7 +192,7 @@ if ($hora < 6) {
 					cancelButtonText: 'Cancelar'
 				}).then((result) => {
 					if (result.isConfirmed) {
-						window.location = 'inc/models/delete.php?delete=true&orden=' + orden;
+						window.location = 'inc/models/delete.php?delete=true&anular=' + orden;
 					} else if (result.isDenied) {
 						Swal.fire('Changes are not saved', '', 'info')
 					}

@@ -24,11 +24,24 @@ if ($hora < 6) {
 } else {
 	$saludo = "Buenas Noches ";
 }
+
 $consulta = $conn->query("SELECT * FROM `facturas` order by no_factura DESC LIMIT 1");
 // $contador = 1;
-while ($solicitud = $consulta->fetch_array()) {
-	$ultimaorden = $solicitud['no_factura'];
+$ultimaorden = 0;
+
+$sql = "SELECT * FROM `ordenes` order by id_orden DESC LIMIT 1";
+
+if ($result=mysqli_query($conn,$sql)) {
+    $rowcount=mysqli_num_rows($result);
+	if ($rowcount > 0) {
+		while ($solicitud = $consulta->fetch_array()) {
+			$ultimaorden = $solicitud['no_factura'];
+		}
+	}else{
+		$ultimaorden = 0;
+	}
 }
+
 ?>
 
 <body>
@@ -69,7 +82,7 @@ while ($solicitud = $consulta->fetch_array()) {
 						<div class="card-body">
 							<form action="inc/models/insert.php" name="formulario" method="post">
 								<?php
-									$orden = $conn->query("SELECT * FROM ordenes a, main_users b, facturas c WHERE a.id_orden = $ID and b.id = a.id_mesero");
+									$orden = $conn->query("SELECT * FROM ordenes a, main_users b WHERE a.id_orden = $ID and b.id = a.id_mesero");
 									$contador = 1;
 									$total = 0;
 									while ($solicitud = $orden->fetch_array()) {
