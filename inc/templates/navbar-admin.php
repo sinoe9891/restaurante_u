@@ -17,18 +17,23 @@ $actualidad = str_replace(".php", "", $archivo);
 	<div class="collapse navbar-collapse" id="navbarCollapse">
 		<div class="navbar-nav ms-auto py-0 pe-4">
 			<a href="dashboard" class="nav-item nav-link <?php echo $actualidad == 'dashboard' ? 'active' : 'false' ?>">Inicio</a>
-			<a href="usuarios" class="nav-item nav-link <?php echo $actualidad == 'usuarios' ? 'active' : '' ?>">Usuarios</a>
-			<a href="recetas-admin" class="nav-item nav-link <?php echo $actualidad == 'recetas-admin' ? 'active' : '' ?>">Recetas</a>
-			<a href="menu-admin" class="nav-item nav-link <?php echo $actualidad == 'menu-admin' ? 'active' : '' ?>">Menú</a>
+			<div class="nav-item dropdown">
+				<a href="usuarios" class="nav-item nav-link <?php echo $actualidad == 'usuarios' ? 'active' : '' ?>">Usuarios</a>
+				<div class="dropdown-menu m-0">
+					<a href="equipo" class="dropdown-item">Equipo</a>
+				</div>
+			</div>
+			<!-- <a href="recetas-admin" class="nav-item nav-link <?php echo $actualidad == 'recetas-admin' ? 'active' : '' ?>">Recetas</a> -->
+			<a href="menu_admin" class="nav-item nav-link <?php echo $actualidad == 'menu_admin' ? 'active' : '' ?>">Menú</a>
 			<div class="nav-item dropdown">
 				<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Analytics</a>
 				<div class="dropdown-menu m-0">
 					<a href="booking" class="dropdown-item">Comportamiento</a>
-					<a href="team" class="dropdown-item">Adquisición</a>
-					<a href="testimonial" class="dropdown-item">Balance</a>
+					<a href="#" class="dropdown-item">Adquisición</a>
+					<a href="#" class="dropdown-item">Balance</a>
 				</div>
 			</div>
-			<a href="contact" class="nav-item nav-link">Soporte</a>
+			<!-- <a href="booking" class="nav-item nav-link">Soporte</a> -->
 		</div>
 		<a href="logout" class="btn btn-primary py-2 px-4">Cerrar Sesión</a>
 	</div>
