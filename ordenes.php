@@ -83,7 +83,7 @@ if ($hora < 6) {
 									<?php
 									$date = date('Y-m-d', time());  
 									// while ($solicitud = $consulta->fetch_array()) {
-									$consulta = $conn->query("SELECT * FROM ordenes a, main_users b WHERE a.date = '$date' and a.id_mesero = b.id ORDER BY a.datetime DESC");
+									$consulta = $conn->query("SELECT * FROM ordenes a, main_users b WHERE a.date = '$date' and a.id_mesero = b.id and a.estado = 'cola' ORDER BY a.datetime DESC");
 									$contador = 1;
 									$total = 0;
 									while ($solicitud = $consulta->fetch_array()) {
@@ -104,7 +104,7 @@ if ($hora < 6) {
 										}
 									?>
 										<tr id="solicitud:<?php echo $solicitud['id_orden'] ?>">
-											<td><?php echo $id_orden; ?></td>
+											<td><?php echo '#'.$id_orden; ?></td>
 											<td><?php echo $datetime ?></td>
 											<td><?php echo $id_mesa ?></td>
 											<td><?php echo $nombre . ' '. $apellidos ?></td>
@@ -113,7 +113,7 @@ if ($hora < 6) {
 												<!-- <a href="edit-usuario?ID=<?php echo $solicitud['id_orden'] ?>" target="_self"><span class="badge bg-primary"><i class="fas fa-edit"></i>Editar</span></a> -->
 
 												<span class="badge bg-danger" id="<?php echo $solicitud['id'] ?>" onclick="eliminar('<?php echo $solicitud['id_orden'] ?>')">
-													<i class="fas fa-trash"></i>Eliminar
+													<i class="fas fa-trash"></i>Cancelar
 												</span>
 											</td>
 										</tr>
@@ -158,12 +158,12 @@ if ($hora < 6) {
 				console.log('Hola');
 				Swal.fire({
 					icon: 'success',
-					title: '¡Usuario Eliminado!',
-					text: 'El usuario fue eliminado correctamente',
+					title: '¡Orden Canceladas!',
+					text: 'La orden fue cancelada',
 					position: 'center',
 					showConfirmButton: true
 				}).then(function () {
-					// window.location = 'usuarios.php';
+					// window.location = 'ordenes.php';
 				});
 			</script>";
 			} elseif ($_GET['del'] == 0) {
@@ -172,16 +172,16 @@ if ($hora < 6) {
 				Swal.fire({
 					icon: 'error',
 					title: 'Oops...',
-					text: 'El usuario no se pudo eliminar'
+					text: 'La Orden no se pudo cancelar'
 				}).then(function () {
-					// window.location = 'usuarios.php';
+					// window.location = 'ordenes.php';
 				});
 				</script>";
 			}
 		}
 		?>
 		<script>
-			function eliminar(idusuario) {
+			function eliminar(orden) {
 				console.log("eliminar");
 				Swal.fire({
 					title: 'Seguro(a)?',
@@ -190,11 +190,11 @@ if ($hora < 6) {
 					showCancelButton: true,
 					confirmButtonColor: '#3085d6',
 					cancelButtonColor: '#d33',
-					confirmButtonText: 'Sí, borrar!',
+					confirmButtonText: 'Sí, cancelar!',
 					cancelButtonText: 'Cancelar'
 				}).then((result) => {
 					if (result.isConfirmed) {
-						window.location = 'inc/models/delete.php?delete=true&id=' + idusuario;
+						window.location = 'inc/models/delete.php?delete=true&orden=' + orden;
 					} else if (result.isDenied) {
 						Swal.fire('Changes are not saved', '', 'info')
 					}

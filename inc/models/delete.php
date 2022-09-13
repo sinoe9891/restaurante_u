@@ -16,3 +16,17 @@ if (isset($_GET['delete']) && isset($_GET['id'])) {
 		}
 	}
 }
+if (isset($_GET['delete']) && isset($_GET['orden'])) {
+	$accion = $_GET['delete'];
+	$id_orden = $_GET['orden'];
+	if ($accion === 'true') {
+		$sql = "UPDATE ordenes SET estado = 'cancelada' WHERE id_orden = $id_orden";
+		if (mysqli_query($conn, $sql)) {
+			echo 'Insertó';
+			header('Location: ../../ordenes?del=1');
+		} else {
+			// header('Location: ../../usuarios?del=0');
+			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		}
+	}
+}

@@ -97,7 +97,7 @@ if ($hora < 6) {
 												<!-- <a href="edit-usuario?ID=<?php echo $solicitud['id_orden'] ?>" target="_self"><span class="badge bg-primary"><i class="fas fa-edit"></i>Editar</span></a> -->
 
 												<span class="badge bg-danger" id="<?php echo $solicitud['id'] ?>" onclick="eliminar('<?php echo $solicitud['id_orden'] ?>')">
-													<i class="fas fa-trash"></i>Eliminar
+													<i class="fas fa-trash"></i>Cancelar
 												</span>
 											</td>
 										</tr>
@@ -119,9 +119,9 @@ if ($hora < 6) {
 								</thead>
 							</table>
 							<div class="col-12 d-flex justify-content-end">
-								<input type="submit" class="btn btn-primary me-1 mb-1" name="name" value="Cocinar">
+								<!-- <input type="submit" class="btn btn-primary me-1 mb-1" name="name" value="Cocinar"> -->
 								<a href="mesas_mesero">
-									<div class="btn btn-secondary me-1 mb-1">Regresar</div>
+									<div class="btn btn-secondary me-1 mb-1">Regresar a Mesas</div>
 								</a>
 							</div>
 						</div>
