@@ -18,9 +18,9 @@ if ($hora < 6) {
 	$saludo = "Buenas Noches ";
 }
 if (isset($_GET['idm'])) {
-	$user_id = $_GET['idm'];
+	$idm = $_GET['idm'];
 } else {
-	header('Location: usuarios');
+	header('Location: mesas');
 }
 ?>
 
@@ -64,21 +64,20 @@ if (isset($_GET['idm'])) {
 				<section class="section clientes">
 					<div class="card">
 						<div class="card-body">
-							<form class="form" id="editarUsuario" method="post" action="inc/models/update.php" role="form">
+							<form class="form" id="editarMesa" method="post" action="inc/models/update.php" role="form">
 								<div class="tab-content" id="myTabContent">
 									<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
 										<div class="card-body">
 											<?php
 											$obtenerTodo = obtenerTodo('main_users');
-											$consulta = $conn->query("SELECT a.numero_mesa, b.descripcion, c.id, c.usuario_name, c.apellidos, a.estado_mesa FROM mesas a, main_cargo b, main_users c WHERE a.id = $user_id and a.id_mesero = b.id_role and c.id = a.id_mesero;");
+											$consulta = $conn->query("SELECT * FROM `mesas` where id = '$idm'");
 											$numero = 1;
 											while ($solicitud = $consulta->fetch_array()) {
 												$id = $solicitud['id'];
-												$usuario_name = $solicitud['usuario_name'];
-												$apellidos = $solicitud['apellidos'];
 												$estado = $solicitud['estado_mesa'];
 												$numero_mesa = $solicitud['numero_mesa'];
+												$id_mesero = $solicitud['id_mesero'];
 
 												if ($estado == 'v') {
 													$estadoLote = 'Vendido';
@@ -95,6 +94,7 @@ if (isset($_GET['idm'])) {
 													<div class="col-md-6 col-12">
 														<div class="form-group">
 															<label for="first-name-column">Número de Mesa</label>
+															<input type="hidden" id="idm" name="idm" value="<?php echo $idm; ?>">
 															<input type="text" class="form-control" id="numero_mesa" name="numero_mesa" value="<?php echo $numero_mesa; ?>" disabled readonly>
 															<!-- <select class="form-select" name="role" id="role">
 																		<?php
@@ -118,6 +118,7 @@ if (isset($_GET['idm'])) {
 														<div class="form-group">
 															<label for="first-name-column">Mesero</label>
 															<select class="form-select" name="role" id="role">
+																<option name="role" value="0" selected>Sin Asignar</option>
 																<?php
 																$obtenerTodo = obtenerTodo('main_users');
 																if ($obtenerTodo->num_rows > 0) {
@@ -126,7 +127,7 @@ if (isset($_GET['idm'])) {
 																		$apellidos = $row['apellidos'];
 																		$id_user = $row['id'];
 																		$descripcion = $row['numero_mesa'];
-																		if ($id_user == $id) {
+																		if ($id_user == $id_mesero) {
 																			echo '<option name="role" value="' . $id_user . '" selected>' . $usuario_name . ' ' . $apellidos . '</option>';
 																		} else {
 																			echo '<option name="role" value="' . $id_user . '">' . $usuario_name . ' ' . $apellidos . '</option>';
@@ -188,27 +189,26 @@ if (isset($_GET['idm'])) {
 				console.log('Hola');
 				Swal.fire({
 					icon: 'success',
-					title: '¡Usuario Actualizado!',
-					text: 'El usuario fue actualizado correctamente',
+					title: '¡Mesa Actualizada!',
+					text: 'Mesa fue actualizada correctamente',
 					position: 'center',
 					showConfirmButton: true
 				}).then(function () {
-					window.location = 'usuarios.php';
+					window.location = 'mesas.php';
 				});
 			</script>";
 			} elseif ($_GET['up'] == 0) {
 				echo "<script>
-				console.log('Hola');
 				Swal.fire({
 					icon: 'error',
 					title: 'Oops...',
-					text: 'El usuario no se actualizó'
+					text: 'La mesa no se actualizó'
 				}).then(function () {
-					window.location = 'usuarios.php';
+					window.location = 'mesas.php';
 				});
 				</script>";
 			}
-		} elseif (!isset($_GET['ID'])) {
-			header('Location: usuarios');
+		} elseif (!isset($_GET['idm'])) {
+			header('Location: mesas');
 		};
 		?>

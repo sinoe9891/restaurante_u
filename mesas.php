@@ -83,24 +83,34 @@ if ($hora < 6) {
 												<img class="mesa" width='200px' src="img/mesa.svg" alt="">
 												<p>Mesa <?php echo $numero_mesa; ?></p>
 												<a href="edit-mesa?idm=<?php echo $solicitud['id'] ?>" target="_self">
-														<?php
-															if ($asignada == 0) {
-																echo '<span class="badge bg-danger">Sin Mesero</span>';
-															}else{
-																echo '<span class="badge bg-success"></span>';
-															};
-														?>
+													<?php
+													if ($asignada == 0) {
+														echo '<span class="badge bg-danger">Sin Mesero</span>';
+													} else if ($estado == 'd') {
+														echo '<span class="badge bg-danger">Deshabilitada</span>';
+													} else {
+														echo '<span class="badge bg-success"></span>';
+													};
+													?>
 													<span class="badge bg-primary">
 														<i class="fas fa-edit"></i>
 														<?php
-															if ($asignada == 0) {
-																echo 'Asignar';
-															}else{
-																echo 'Editar';
-															};
+														if ($asignada == 0) {
+															echo 'Asignar';
+														} else {
+															echo 'Editar';
+														};
 														?>
-													</span>
 												</a>
+												<?php
+												if ($asignada == 0) {
+													echo '</span><span class="badge bg-danger" id="'. $solicitud['id'] . '" onclick="eliminar(' . $idmesa . ')">
+													<i class="fas fa-trash"></i></span>';
+												} else {
+													echo '';
+												};
+												?>
+												
 											</a>
 										</div>
 									</div>
@@ -128,30 +138,29 @@ if ($hora < 6) {
 				console.log('Hola');
 				Swal.fire({
 					icon: 'success',
-					title: '¡Usuario Eliminado!',
-					text: 'El usuario fue eliminado correctamente',
+					title: 'Mesa Eliminada!',
+					text: 'La mesa fue eliminado correctamente',
 					position: 'center',
 					showConfirmButton: true
 				}).then(function () {
-					// window.location = 'usuarios.php';
+					// window.location = 'mesas.php';
 				});
 			</script>";
 			} elseif ($_GET['del'] == 0) {
 				echo "<script>
-				console.log('Hola');
 				Swal.fire({
 					icon: 'error',
 					title: 'Oops...',
-					text: 'El usuario no se pudo eliminar'
+					text: 'La mesa no se pudo eliminar'
 				}).then(function () {
-					// window.location = 'usuarios.php';
+					// window.location = 'mesas.php';
 				});
 				</script>";
 			}
 		}
 		?>
 		<script>
-			function eliminar(idusuario) {
+			function eliminar(idmesa) {
 				console.log("eliminar");
 				Swal.fire({
 					title: 'Seguro(a)?',
@@ -164,7 +173,7 @@ if ($hora < 6) {
 					cancelButtonText: 'Cancelar'
 				}).then((result) => {
 					if (result.isConfirmed) {
-						window.location = 'inc/models/delete.php?delete=true&id=' + idusuario;
+						window.location = 'inc/models/delete.php?delete=true&idm=' + idmesa;
 					} else if (result.isDenied) {
 						Swal.fire('Changes are not saved', '', 'info')
 					}

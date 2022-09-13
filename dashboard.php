@@ -89,7 +89,6 @@ if ($hora < 6) {
 							<div class="p-4">
 								<i class="fa fa-3x fa-utensils text-primary mb-4"></i>
 								<h5>Menú</h5>
-								<p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
 							</div>
 						</div>
 					</div>
@@ -98,7 +97,6 @@ if ($hora < 6) {
 							<div class="p-4">
 								<i class="fa fa-3x fa-cart-plus text-primary mb-4"></i>
 								<h5>Ordenes</h5>
-								<p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
 							</div>
 						</div>
 					</div>

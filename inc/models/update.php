@@ -27,3 +27,28 @@ if (isset($_POST['user_id']) && isset($_POST['update'])) {
 		}
 	}
 };
+
+if (isset($_POST['idm']) && isset($_POST['updatemesa'])) {
+	$bandera = $_POST['updatemesa'];
+	$idm = $_POST['idm'];
+	$role = $_POST['role'];
+	$estado = $_POST['estado'];
+	if ($role == 0) {
+		$asignar = 0;
+	}else{
+		$asignar = 1;
+	}
+
+	if ($bandera == 'Actualizar') {
+		$role = $_POST['role'];
+		$estado = $_POST['estado'];
+		$sql = "UPDATE `mesas` SET `id_mesero` = '$role', `estado_mesa` = '$estado', `asignada` = '$asignar'  WHERE `mesas`.`id` = $idm";
+
+		if ($conn->query($sql) === TRUE) {
+			echo "Record updated successfully";
+			header('Location: ../../edit-mesa.php?idm='.$idm.'&up=1');
+		} else {
+			// header('Location: ../../edit-mesa.php?idm='.$idm.'&up=0');
+		}
+	}
+};

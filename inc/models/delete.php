@@ -30,3 +30,18 @@ if (isset($_GET['delete']) && isset($_GET['orden'])) {
 		}
 	}
 }
+
+if (isset($_GET['delete']) && isset($_GET['idm'])) {
+	$accion = $_GET['delete'];
+	$id = $_GET['idm'];
+	if ($accion === 'true') {
+		$sql = "DELETE FROM `mesas` WHERE `mesas`.`id` = '$id'";
+		if (mysqli_query($conn, $sql)) {
+			echo 'Insertó';
+			header('Location: ../../mesas?del=1');
+		} else {
+			header('Location: ../../mesas?del=0');
+			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		}
+	}
+}

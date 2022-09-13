@@ -56,14 +56,14 @@ if ($hora < 6) {
 				<section class="section clientes">
 					<div class="card">
 						<div class="card-body">
-							<form class="form" id="editarUsuario" method="post" action="inc/models/insert.php" role="form">
+							<form class="form" id="editarUsuario" method="post" action="inc/models/insert.php">
 								<div class="tab-content" id="myTabContent">
 									<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
 										<div class="card-body">
 											<?php
 											$obtenerTodo = obtenerTodo('main_users');
-											$consulta = $conn->query("SELECT * FROM mesas a WHERE id=(SELECT max(id) FROM mesas) and a.asignada = 0;");
+											$consulta = $conn->query("SELECT * FROM mesas a WHERE id=(SELECT max(id) FROM mesas) ;");
 											$numero = 1;
 											while ($solicitud = $consulta->fetch_array()) {
 												$id = $solicitud['id'];
@@ -85,29 +85,13 @@ if ($hora < 6) {
 													<div class="col-md-6 col-12">
 														<div class="form-group">
 															<label for="first-name-column">Número de Mesa*</label>
-															<input type="number" class="form-control" id="numero_mesa" name="numero_mesa" value="<?php echo $numero_mesa + 1; ?>" readonly disabled>
-															<!-- <select class="form-select" name="role" id="role">
-								<?php
-												$obtenerNumeroMesas = obtenerNumeroMesas();
-												if ($obtenerNumeroMesas->num_rows > 0) {
-													while ($row = $obtenerNumeroMesas->fetch_assoc()) {
-														$id_mesa = $row['id'];
-														$descripcion = $row['numero_mesa'];
-														if ($id_mesa == $id) {
-															echo '<option name="role" value="' . $id_mesa . '" selected>' . $descripcion . '</option>';
-														} else {
-															echo '<option name="role" value="' . $id_mesa . '">' . $descripcion . '</option>';
-														}
-													}
-												}
-								?>
-							</select> -->
+															<input type="number" class="form-control" id="numero_mesa" name="numero_mesa" value="<?php echo $numero_mesa + 1; ?>" readonly>
 														</div>
 													</div>
 													<div class="col-md-6 col-12">
 														<div class="form-group">
 															<label for="first-name-column">Mesero</label>
-															<select class="form-select" name="role" id="role">
+															<select class="form-select" name="usuario" id="role">
 																<?php
 																$obtenerTodo = obtenerTodo('main_users');
 																if ($obtenerTodo->num_rows > 0) {
@@ -115,12 +99,9 @@ if ($hora < 6) {
 																		$usuario_name = $row['usuario_name'];
 																		$apellidos = $row['apellidos'];
 																		$id_user = $row['id'];
-																		$descripcion = $row['numero_mesa'];
-																		if ($id_user == $id) {
-																			echo '<option name="role" value="' . $id_user . '" selected>' . $usuario_name . ' ' . $apellidos . '</option>';
-																		} else {
-																			echo '<option name="role" value="' . $id_user . '">' . $usuario_name . ' ' . $apellidos . '</option>';
-																		}
+																		
+																		echo '<option name="usuario" value="' . $id_user . '">' . $usuario_name . ' ' . $apellidos . '</option>';
+																		
 																	}
 																}
 																?>
@@ -152,7 +133,7 @@ if ($hora < 6) {
 										</div>
 									</div>
 									<div class="col-12 d-flex justify-content-end">
-										<input type="hidden" class="btn btn-primary me-1 mb-1" id="tipo" name="accion" value="newUsuario">
+										<input type="hidden" class="btn btn-primary me-1 mb-1" id="tipo" name="accion" value="newMesa">
 										<input class="btn btn-primary me-1 mb-1" type="submit" value="Crear" name="crear">
 										<a href="mesas">
 											<div class="btn btn-secondary me-1 mb-1">Regresar</div>
@@ -188,12 +169,12 @@ if ($hora < 6) {
 				echo "<script>
 				Swal.fire({
 					icon: 'success',
-					title: '¡Usuario Creado!',
-					text: 'El usuario se ha creado correctamente',
+					title: '¡Mesa Creada!',
+					text: 'La mesa se ha creado correctamente',
 					position: 'center',
 					showConfirmButton: true
 				}).then(function () {
-					window.location = 'usuarios.php';
+					window.location = 'mesas.php';
 				});
 			</script>";
 			} elseif ($_GET['add'] == 0) {
