@@ -199,14 +199,17 @@ if ($accion === 'facturacrear') {
 
 	$orden = "UPDATE `ordenes` SET `estado` = 'pagada' WHERE `ordenes`.`id_orden` = $id_orden";
 
-	if (mysqli_query($conn, $sql) && mysqli_query($conn, $orden)) {
+	$conexion = mysqli_query($conn, $sql);
+	$conexionorden = mysqli_query($conn, $sql);
+	$last_id = mysqli_insert_id($conn);
+	echo $last_id;
+	if ($conexion && $conexionorden) {
 
-		// $last_id = mysqli_insert_id($conn);
-		header('Location: ../../detalle_factura.php?ID='.$id_orden.'add=1');
-		// header('Location: ../../doc/factura.php?ID='.$last_id.'add=1');
+		header('Location: ../../detalle_factura.php?ID='.$id_orden.'&add=1');
+		header('Location: ../../doc/factura.php?ID='.$last_id.'&add=1');
 	} else {
-		header('Location: ../../ddoc/factura.php?ID='.$id_orden.'add=0');
-		// header('Location: ../../doc/factura.php?ID='.$last_id.'add=0');
+		header('Location: ../../ddoc/factura.php?ID='.$id_orden.'&add=0');
+		header('Location: ../../doc/factura.php?ID='.$last_id.'&add=0');
 		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 	}
 }

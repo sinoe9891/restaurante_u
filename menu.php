@@ -4,7 +4,7 @@ include 'inc/templates/header.php';
 include 'inc/conexion.php';
 // include 'inc/sesiones.php';
 session_start();
-$name = $_SESSION['nombre_usuario'];
+// $name = $_SESSION['nombre_usuario'];
 $today = getdate();
 $hora = $today["hours"];
 if ($hora < 6) {

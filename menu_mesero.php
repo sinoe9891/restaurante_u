@@ -42,7 +42,7 @@ if ($hora < 6) {
 		<!-- Navbar & Hero Start -->
 		<div class="container-xxl position-relative p-0">
 			<?php
-			include 'inc/templates/navbar.php';
+			include 'inc/templates/navbar-mesero.php';
 			?>
 
 			<div class="container-xxl py-5 bg-dark hero-header mb-5">

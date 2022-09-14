@@ -142,7 +142,7 @@ if ($result=mysqli_query($conn,$sql)) {
 											$oferta = $solicitud['oferta'];
 											$precio_oferta = $solicitud['precio_oferta'];
 											if ($oferta == 1) {
-												$precio = $precio_oferta;
+												$precio = $precioplato;
 												$check = 'L. '.$precioplato.' ✅ ';
 											} else {
 												$precio = $precioplato;
